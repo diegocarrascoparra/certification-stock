@@ -1,0 +1,68 @@
+<div class="contenedor">
+  <button
+    (click)="onRemoveClick()"
+    class="btn-close float-end mt-3 ml-25"
+    id="remove{{ symbolCompany }}"
+  ></button>
+  <div class="well flex mt-5">
+    <div class="container" *ngIf="symbol">
+      <div class="row">
+        <h3>{{ nombreCompany }} ({{ symbolCompany }})</h3>
+
+        <div class="col-3 col-sm-3">Change today: {{ symbol.d }}</div>
+        <div class="col-3 col-sm-3">
+          Opening price: {{ symbol.o | currency: "USD" }}
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 offset-md-4">
+            <ng-container *ngIf="symbol.d">
+              <img
+                class="icon"
+                src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/42-512.png"
+                width="100"
+                height="100"
+                alt="down"
+                class="rounded float-end"
+                *ngIf="symbol.d < 0"
+              />
+              <img
+                class="icon"
+                src="https://cdn1.iconfinder.com/data/icons/basic-ui-elements-coloricon/21/11-512.png"
+                width="70"
+                height="70"
+                alt="up"
+                class="rounded float-end"
+                *ngIf="symbol.d > 0"
+              />
+            </ng-container>
+          </div>
+        </div>
+        <!-- Force next columns to break to new line -->
+        <div class="w-100"></div>
+
+        <div class="col-6 col-sm-3">
+          Current price: {{ symbol.c | currency: "USD" }}
+        </div>
+        <div class="col-6 col-sm-3">
+          High price: {{ symbol.h | currency: "USD" }}
+        </div>
+
+        <h4></h4>
+        <h4></h4>
+        <h4></h4>
+        <h4></h4>
+      </div>
+
+      <p>
+        <button
+          id="sentiment{{ symbolCompany }}"
+          routerLink="/sentiment/{{ symbolCompany }}"
+        >
+          Go to social sentiment details
+        </button>
+      </p>
+    </div>
+    <div></div>
+  </div>
+</div>

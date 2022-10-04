@@ -1,0 +1,35 @@
+<div class="contenedor">
+  <div class="d-flex justify-content-center" *ngIf="load">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <ng-container *ngIf="sentiment">
+    <div class="row">
+      <ng-container *ngFor="let item of sentiment?.data; index as i ">
+        <div class="col-sm-4 tarjeta" *ngIf="i<3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{nombre | uppercase}}</h5>
+              <div class="float-end imagen">
+                <img class="icon"
+                  src="https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/42-512.png" width="100"
+                  height="100" alt="down" *ngIf="item.change < 0">
+                <img class="icon" src="https://cdn1.iconfinder.com/data/icons/basic-ui-elements-coloricon/21/11-512.png"
+                  width="80" height="80" alt="up" *ngIf="item.change > 0">
+              </div>
+              <p class="card-text">{{item.month | months | uppercase}}</p>
+              <p class="card-text">Change: {{item.change}}</p>
+              <p class="card-text">MSPR: {{item.mspr}}</p>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+
+
+    <a href="stock-tracker/" id="backBtn" class="btn btn-primary mb-2 ml-5">
+      < Back to list stocks</a>
+  </ng-container>
+</div>

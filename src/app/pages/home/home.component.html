@@ -1,0 +1,47 @@
+<div class="card text-center w-90">
+  <div class="card-body contenedor">
+    <h5 class="card-title">
+      Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)
+    </h5>
+    <br />
+    <div class="row g-3">
+      <div class="col-auto">
+        <input
+          class="form-control"
+          [(ngModel)]="termino"
+          type="text"
+          id="stockInput"
+          minlength="1"
+          maxlength="5"
+          require
+        />
+      </div>
+      <div class="col-auto">
+        <button
+          class="btn btn-primary mb-3"
+          id="trackBtn"
+          (click)="company(termino)"
+        >
+          Track Stock
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="datosNombre && stockQuote">
+    <div class="d-flex justify-content-center" *ngIf="load">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <app-stock-preview
+      *ngFor="let item of datosNombre; index as i"
+      [nombreCompany]="item.result[0].description"
+      [symbolCompany]="item.result[0].displaySymbol"
+      [symbol]="stockQuote[i]"
+      (onRemove)="remove($event)"
+    >
+    </app-stock-preview>
+  </ng-container>
+</div>
